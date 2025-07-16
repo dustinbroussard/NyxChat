@@ -1,26 +1,38 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { StatusBar, Style } from '@capacitor/status-bar';
 
-type Theme = 'dark' | 'light';
+type ThemeMode = 'dark' | 'light';
+type ThemeColor = 'default' | 'blue' | 'red' | 'green' | 'purple';
 
 type ThemeContextType = {
-  theme: Theme;
-  toggleTheme: () => void;
+  themeMode: ThemeMode;
+  themeColor: ThemeColor;
+  toggleThemeMode: () => void;
+  setThemeColor: (color: ThemeColor) => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme');
-    return (stored as Theme) || 'light';
+  const [themeMode, setThemeMode] = useState<ThemeMode>(() => {
+    const stored = localStorage.getItem('themeMode');
+    return (stored as ThemeMode) || 'light';
+  });
+
+  const [themeColor, setThemeColor] = useState<ThemeColor>(() => {
+    const stored = localStorage.getItem('themeColor');
+    return (stored as ThemeColor) || 'default';
   });
 
   useEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
-    localStorage.setItem('theme', theme);
+    // Remove all theme classes first
+    root.classList.remove('light', 'dark', 'blue-dark', 'blue-light', 'red-dark', 
+                         'red-light', 'green-dark', 'green-light', 'purple-dark', 'purple-light');
+    // Add the current theme class
+    root.classList.add(`${themeColor}-${themeMode}`);
+    localStorage.setItem('themeMode', themeMode);
+    localStorage.setItem('themeColor', themeColor);
 
     // Capacitor status bar sync
     const applyStatusBarStyle = async () => {
@@ -40,12 +52,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     applyStatusBarStyle();
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  const toggleThemeMode = () => {
+    setThemeMode(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ 
+      themeMode, 
+      themeColor,
+      toggleThemeMode,
+      setThemeColor
+    }}>
       {children}
     </ThemeContext.Provider>
   );

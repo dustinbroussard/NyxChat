@@ -24,7 +24,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   open,
   onOpenChange
 }) => {
-  const { theme, toggleTheme } = useTheme();
+  const { themeMode, themeColor, toggleThemeMode, setThemeColor } = useTheme();
   const [fontSize, setFontSize] = useState(16);
   const [autoSave, setAutoSave] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(false);
@@ -50,15 +50,31 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* Theme Settings */}
           <div className="space-y-3">
             <h4 className="font-medium">Appearance</h4>
-            <div className="flex items-center justify-between">
-              <Label htmlFor="dark-mode" className="text-sm">
-                Dark Mode
-              </Label>
-              <Switch
-                id="dark-mode"
-                checked={theme === 'dark'}
-                onCheckedChange={toggleTheme}
-              />
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="dark-mode" className="text-sm">
+                  Dark Mode
+                </Label>
+                <Switch
+                  id="dark-mode"
+                  checked={themeMode === 'dark'}
+                  onCheckedChange={toggleThemeMode}
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-sm">Color Theme</Label>
+                <select
+                  value={themeColor}
+                  onChange={(e) => setThemeColor(e.target.value as ThemeColor)}
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                >
+                  <option value="default">Default</option>
+                  <option value="blue">Blue</option>
+                  <option value="red">Red</option>
+                  <option value="green">Green</option>
+                  <option value="purple">Purple</option>
+                </select>
+              </div>
             </div>
           </div>
 
