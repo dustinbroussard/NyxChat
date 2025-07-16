@@ -1,0 +1,86 @@
+/* Mobile Keyboard Handling Styles */
+
+/* Base layout adjustments */
+.chat-interface {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content area that adjusts when keyboard is shown */
+.chat-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Messages container */
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Footer spacing when keyboard is hidden */
+.chat-footer-spacing {
+  height: 56px;
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+}
+
+/* Smooth transitions for keyboard appearance */
+.keyboard-transition {
+  transition: transform 0.3s ease-in-out, bottom 0.3s ease-in-out;
+}
+
+/* Prevent content jump when keyboard appears */
+@supports (padding: max(0px)) {
+  .chat-content {
+    padding-bottom: max(56px, env(safe-area-inset-bottom, 8px));
+  }
+}
+
+/* iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .chat-interface {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/* Android-specific fixes */
+.android .chat-interface {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.android .welcome-screen {
+  padding-bottom: calc(56px + env(safe-area-inset-bottom, 8px));
+}
+
+.android .welcome-screen-buttons {
+  margin-bottom: 16px;
+}
+
+.android .chat-footer {
+  transform: translateY(0) !important;
+  will-change: transform;
+}
+
+.android.keyboard-visible .chat-content {
+  padding-bottom: 56px;
+}
+
+.android.keyboard-visible .chat-footer {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(0) !important;
+}

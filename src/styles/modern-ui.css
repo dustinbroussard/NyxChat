@@ -1,0 +1,168 @@
+
+/* Modern UI Enhancements */
+
+/* Sophisticated shadows and depth */
+.shadow-elegant {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-elegant-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-elegant-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Smooth transitions for interactive elements */
+.transition-elegant {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-elegant-fast {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sophisticated gradients */
+.gradient-elegant {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.gradient-elegant-dark {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+/* Modern glass morphism effects */
+.glass-effect {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-effect-dark {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced button styles */
+.btn-modern {
+  @apply rounded-xl px-6 py-3 font-medium transition-elegant shadow-elegant;
+  transform: translateY(0);
+}
+
+.btn-modern:hover {
+  @apply shadow-elegant-lg;
+  transform: translateY(-1px);
+}
+
+.btn-modern:active {
+  transform: translateY(0);
+  @apply shadow-elegant;
+}
+
+/* Modern card styling */
+.card-modern {
+  @apply rounded-xl shadow-elegant border-0;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.dark .card-modern {
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Sophisticated modal animations */
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modal-exit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+}
+
+.modal-animate-in {
+  animation: modal-enter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-animate-out {
+  animation: modal-exit 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced input styling */
+.input-modern {
+  @apply rounded-xl border-2 border-gray-200 focus:border-blue-500 transition-elegant;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.dark .input-modern {
+  @apply border-gray-700 focus:border-blue-400;
+  background: rgba(0, 0, 0, 0.95);
+}
+
+/* Modern ripple effect */
+.ripple-modern {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-modern::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+  z-index: 0;
+}
+
+.ripple-modern:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Enhanced scrollbar */
+.scrollbar-modern {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.scrollbar-modern::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-modern::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.scrollbar-modern::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.scrollbar-modern::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+  background-clip: content-box;
+}

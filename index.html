@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Mobile-first PWA Essentials -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no" />
+    <meta name="theme-color" content="#101827" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8fafc" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101827" />
+    <meta name="msapplication-TileColor" content="#101827" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="NyxChat" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="NyxChat" />
+    
+    <!-- Enhanced security -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <!-- Manifest and Icons -->
+    <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icon-72.png" />
+    <link rel="apple-touch-icon" sizes="96x96" href="./icon-96.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="./icon-128.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="./icon-144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="./icon-152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="./icon-192.png" />
+    <link rel="apple-touch-icon" sizes="384x384" href="./icon-384.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="./icon-512.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./icon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./icon-16.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
+    <meta name="msapplication-TileImage" content="./icon-144.png" />
+    <meta name="msapplication-square70x70logo" content="./icon-72.png" />
+    <meta name="msapplication-square150x150logo" content="./icon-152.png" />
+    <meta name="msapplication-square310x310logo" content="./icon-384.png" />
+    
+    <!-- SEO and Social -->
+    <title>NyxChat - AI Assistant</title>
+    <meta name="description" content="Your personal AI chat assistant with profiles and memory" />
+    <meta name="keywords" content="AI, chat, assistant, productivity, memory, profiles" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:title" content="NyxChat - AI Assistant" />
+    <meta property="og:description" content="Your personal AI chat assistant with profiles and memory" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://nyxchat.lovable.app" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./icon-192.png" as="image" type="image/png" />
+    <link rel="preload" href="./icon-512.png" as="image" type="image/png" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Mobile viewport height fix
+      function setVH() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+      }
+      
+      setVH();
+      window.addEventListener('resize', setVH);
+      window.addEventListener('orientationchange', setVH);
+
+      // Enhanced PWA Service Worker Registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(registration => {
+              console.log('SW registered:', registration);
+              
+              // Check for updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      // New content available
+                      if (window.confirm('New version available! Refresh to update?')) {
+                        window.location.reload();
+                      }
+                    }
+                  });
+                }
+              });
+              
+              navigator.serviceWorker.addEventListener('controllerchange', () => {
+                window.location.reload();
+              });
+              
+            })
+            .catch(err => {
+              console.error('SW registration failed:', err);
+            });
+        });
+      }
+
+      // Enhanced mobile touch handling
+      let lastTouchEnd = 0;
+      document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+
+      // Prevent pinch zoom
+      document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+      });
+
+      // Handle PWA display mode
+      function detectDisplayMode() {
+        if (navigator.standalone) {
+          return 'standalone-ios';
+        }
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+          return 'standalone';
+        }
+        if (window.matchMedia('(display-mode: minimal-ui)').matches) {
+          return 'minimal-ui';
+        }
+        if (window.matchMedia('(display-mode: fullscreen)').matches) {
+          return 'fullscreen';
+        }
+        return 'browser';
+      }
+
+      // Add display mode to body class
+      const displayMode = detectDisplayMode();
+      document.body.classList.add(`display-${displayMode}`);
+      window.PWA_DISPLAY_MODE = displayMode;
+      
+      // Performance monitoring
+      window.addEventListener('load', () => {
+        if ('performance' in window) {
+          const navigation = performance.getEntriesByType('navigation')[0];
+          if (navigation) {
+            console.log('Page load time:', navigation.loadEventEnd - navigation.loadEventStart, 'ms');
+          }
+        }
+      });
+
+      // Handle offline/online status
+      function updateOnlineStatus() {
+        const isOnline = navigator.onLine;
+        const indicator = document.querySelector('.offline-indicator');
+        if (!isOnline && !indicator) {
+          const div = document.createElement('div');
+          div.className = 'offline-indicator show';
+          div.textContent = 'You are offline';
+          document.body.appendChild(div);
+        } else if (isOnline && indicator) {
+          indicator.remove();
+        }
+      }
+
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+    </script>
+  </body>
+</html>

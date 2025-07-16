@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="status_bar_color">#121212</color>
+  <color name="primary_color">#121212</color> <!-- optional, use your background -->
+  <color name="accent_color">#FF4081</color> <!-- optional -->
+</resources>

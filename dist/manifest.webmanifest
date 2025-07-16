@@ -1,0 +1,124 @@
+
+{
+  "name": "NyxChat - AI Assistant",
+  "short_name": "NyxChat",
+  "description": "Your personal AI chat assistant with profiles and memory. A sophisticated PWA for seamless conversations.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#101827",
+  "background_color": "#101827",
+  "categories": ["productivity", "utilities", "communication", "artificial intelligence"],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "screenshots": [
+    {
+      "src": "./screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "NyxChat desktop interface"
+    },
+    {
+      "src": "./screenshot-narrow.png", 
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "NyxChat mobile interface"
+    }
+  ],
+  "icons": [
+    {
+      "src": "./icon-72.png",
+      "type": "image/png", 
+      "sizes": "72x72",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-96.png",
+      "type": "image/png",
+      "sizes": "96x96", 
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-144.png", 
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-152.png",
+      "type": "image/png", 
+      "sizes": "152x152",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-384.png",
+      "type": "image/png",
+      "sizes": "384x384", 
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Chat",
+      "short_name": "New Chat", 
+      "description": "Start a new conversation",
+      "url": "./",
+      "icons": [
+        {
+          "src": "./icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Memory",
+      "short_name": "Memory",
+      "description": "View chat memory", 
+      "url": "./memory",
+      "icons": [
+        {
+          "src": "./icon-192.png", 
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "short_name": "Settings",
+      "description": "App settings and preferences",
+      "url": "./settings",
+      "icons": [
+        {
+          "src": "./icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
