@@ -34,23 +34,23 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('themeMode', themeMode);
     localStorage.setItem('themeColor', themeColor);
 
-    // Capacitor status bar sync
-    const applyStatusBarStyle = async () => {
-      try {
-        if (theme === 'light') {
-          await StatusBar.setStyle({ style: Style.Dark }); // dark text for light theme
-          await StatusBar.setBackgroundColor({ color: '#ffffff' });
-        } else {
-          await StatusBar.setStyle({ style: Style.Light }); // light text for dark theme
-          await StatusBar.setBackgroundColor({ color: '#000000' });
+      // Capacitor status bar sync
+      const applyStatusBarStyle = async () => {
+        try {
+          if (themeMode === 'light') {
+            await StatusBar.setStyle({ style: Style.Dark }); // dark text for light theme
+            await StatusBar.setBackgroundColor({ color: '#ffffff' });
+          } else {
+            await StatusBar.setStyle({ style: Style.Light }); // light text for dark theme
+            await StatusBar.setBackgroundColor({ color: '#000000' });
+          }
+        } catch (err) {
+          console.warn('StatusBar plugin error:', err);
         }
-      } catch (err) {
-        console.warn('StatusBar plugin error:', err);
-      }
-    };
+      };
 
     applyStatusBarStyle();
-  }, [theme]);
+  }, [themeMode, themeColor]);
 
   const toggleThemeMode = () => {
     setThemeMode(prev => (prev === 'light' ? 'dark' : 'light'));
