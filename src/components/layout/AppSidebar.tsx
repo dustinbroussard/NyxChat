@@ -4,6 +4,7 @@ import {
   MessageSquare,
   Brain,
   Settings,
+  Mic,
   Plus,
   Trash2,
   User,
@@ -35,6 +36,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const staticMenuItems = [
   { title: 'Memory', url: '/memory', icon: Brain },
   { title: 'Profiles', url: '/profiles', icon: User },
+  { title: 'Voice', url: '/voice', icon: Mic },
   { title: 'Settings', url: '/settings', icon: Settings }
 ];
 
