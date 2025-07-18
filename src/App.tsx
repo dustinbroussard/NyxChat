@@ -14,6 +14,7 @@ import ChatInterface from "@/pages/ChatInterface";
 import MemoryManager from "@/pages/MemoryManager";
 import ProfileManager from "@/pages/ProfileManager";
 import Settings from "@/pages/Settings";
+import VoiceMode from "@/pages/VoiceMode";
 import NotFound from "./pages/NotFound";
 import { PWAInstallPrompt } from "@/components/pwa/PWAInstallPrompt";
 import "./animations.css";
@@ -148,10 +149,11 @@ const handleKeyboardHide = () => {
                   <Routes>
                     <Route path="/" element={<MainLayout />}>
                       <Route index element={<ChatInterface keyboardHeight={keyboardHeight} />} />
-                      <Route path="memory" element={<MemoryManager />} />
-                      <Route path="profiles" element={<ProfileManager />} />
-                      <Route path="settings" element={<Settings />} />
-                    </Route>
+                    <Route path="memory" element={<MemoryManager />} />
+                    <Route path="profiles" element={<ProfileManager />} />
+                    <Route path="settings" element={<Settings />} />
+                    <Route path="voice" element={<VoiceMode />} />
+                  </Route>
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   <PWAInstallPrompt />
